@@ -23,7 +23,7 @@ public class Citizen {
 //        Citizen c=new Citizen("Rohan",17,1);
 //        c.printCitizen();
 
-        Vaccine vax=new Vaccine("Covax",2,2);
-        vax.printVaccine();
+//        Vaccine vax=new Vaccine("Covax",2,2);
+//        vax.printVaccine();
     }
 }

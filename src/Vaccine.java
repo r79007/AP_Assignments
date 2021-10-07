@@ -4,7 +4,7 @@ public class Vaccine {
     public static HashMap<String,Vaccine> vaccineMap=new HashMap<>();
     String vaxName;
     int totalDoses;
-    int gapBwDoses;
+    int gapBwDoses=0;
 
     public Vaccine(String vaxName, int totalDoses, int gapBwDoses){
         this.vaxName = vaxName;
@@ -21,8 +21,8 @@ public class Vaccine {
     }
 
     public static void main(String[] args) {
-        Vaccine v1=new Vaccine("Covax",2,2);
-        System.out.println(vaccineMap.get("Covax").vaxName);
+        //Vaccine v1=new Vaccine("Covax",2,2);
+        //System.out.println(vaccineMap.get("Covax").vaxName);
 
     }
 
