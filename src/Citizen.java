@@ -1,12 +1,15 @@
+import java.util.HashMap;
+
 public class Citizen {
     String name;
     int age;
     int uID;    //Unique ID
-
+    public static HashMap<Integer,Citizen> citizenMap=new HashMap<>();
     public Citizen(String name,int age,int uID){
         this.name=name;
         this.age=age;
         this.uID=uID;
+        citizenMap.put(this.uID,this);
     }
 
     public void printCitizen(){
@@ -17,7 +20,10 @@ public class Citizen {
     }
 
     public static void main(String[] args) {
-        Citizen c=new Citizen("Rohan",17,1);
-        c.printCitizen();
+//        Citizen c=new Citizen("Rohan",17,1);
+//        c.printCitizen();
+
+        Vaccine vax=new Vaccine("Covax",2,2);
+        vax.printVaccine();
     }
 }
