@@ -1,11 +1,11 @@
 public class PairH {
     String nameOfVaccine;
-    int numberOfSlots;
-    int availableQuantity;
 
-    public PairH(String nameOfVaccine,int numberOfSlots,int availableQuantity){
+    int availableQuantity=0;
+
+    public PairH(String nameOfVaccine,int availableQuantity){
         this.availableQuantity=availableQuantity;
-        this.numberOfSlots=numberOfSlots;
+
         this.nameOfVaccine=nameOfVaccine;
     }
 }

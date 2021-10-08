@@ -3,12 +3,13 @@ import java.util.HashMap;
 public class Citizen {
     String name;
     int age;
-    int uID;    //Unique ID
-    public static HashMap<Integer,Citizen> citizenMap=new HashMap<>();
-    public Citizen(String name,int age,int uID){
+    long uID;    //Unique ID
+    public static HashMap<Long,Citizen> citizenMap=new HashMap<>();
+    public Citizen(String name,int age,long uID){
         this.name=name;
         this.age=age;
         this.uID=uID;
+
         citizenMap.put(this.uID,this);
     }
 

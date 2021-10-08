@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -7,6 +8,60 @@ public class Main {
         Vaccine v1=new Vaccine(name,numDoses,gap);
         v1.printVaccine();
     }
+    public static void registerHospital(String name,int pinCode){
+        Hospital h1=new Hospital(name,pinCode);
+        h1.printHospital();
+    }
+    public static void registerCitizen(String name,int age,long uID){
+        String countDigits=Long.toString(uID);
+        if(countDigits.length()!=12){
+            System.out.println("Invalid unique ID entered");
+            return;
+        }else if(age<=18){
+            System.out.println("Citizen Name: Age: Unique ID: Citizen Name: "+name+", "+"Age: "+age+", "+"Unique ID: "+uID);
+            System.out.println("Only above 18 are allowed");
+        }
+        else{
+            Citizen cit1=new Citizen(name,age,uID);
+            cit1.printCitizen();
+
+        }
+
+    }
+    public static void addHospitalSlot(int numberOfSlots,int dayNumber,int quantity,String vax,int HospitalID){
+        String countDigits=Long.toString(HospitalID);
+        if(countDigits.length()!=6 || Hospital.hID<HospitalID){
+            System.out.println("Invalid hospital ID entered");
+            return;
+        }
+        ArrayList<HospitalSlot> hslotArr=HospitalSlot.HospitalSlotMap2.get(HospitalID);
+        if(hslotArr!=null) {
+            for (int i = 0; i < hslotArr.size(); i++) {
+                if (hslotArr.get(i).dayNumber == dayNumber) {
+                    System.out.println("There already exists a slot for this hospital for this day.");
+                    return;
+                }
+            }
+        }
+
+        HospitalSlot hs1=new HospitalSlot(numberOfSlots,dayNumber,quantity,vax,HospitalID);
+        hs1.addHospitalSlot();
+        hs1.printHospitalSlot();
+
+
+    }
+    public static void listAllSlots(int hosID){
+        ArrayList<HospitalSlot> hospitalSlotArrayList=HospitalSlot.HospitalSlotMap2.get(hosID);
+        if(hospitalSlotArrayList!=null){
+            for(int i=0;i<hospitalSlotArrayList.size();i++){
+                System.out.println("Day: "+hospitalSlotArrayList.get(i).dayNumber+" "+"Vaccine: "+hospitalSlotArrayList.get(i).vax+" Available Qty: "+hospitalSlotArrayList.get(i).quantity);
+            }
+        }else{
+            System.out.println("No slots added");
+        }
+    }
+
+
     public static void main(String[] args) {
         System.out.println("CoWin Portal initialized....\n" +
                 "---------------------------------\n" +
@@ -36,6 +91,44 @@ public class Main {
                     gap = sc.nextInt();
                 }
                 addVaccine(name,numDoses,gap);
+            }else if(ip==2){
+                System.out.print("Hospital Name: ");
+                String hospitalName= sc.next();
+                System.out.print("PinCode: ");
+                int pinCode= sc.nextInt();
+                registerHospital(hospitalName,pinCode);
+            }else if(ip==3){
+                System.out.print("Citizen Name: ");
+                String citName=sc.next();
+                System.out.print("Age: ");
+                int age=sc.nextInt();
+                System.out.print("Unique ID: ");
+                long uniqueID=sc.nextLong();
+                registerCitizen(citName,age,uniqueID);
+            }else if(ip==4){
+                System.out.print("Enter Hosptal ID: ");
+                int hosID=sc.nextInt();
+                System.out.print("Enter number of Slots to be added: ");
+                int numSlots=sc.nextInt();
+                for(int j=0;j<numSlots;j++) {
+                    System.out.print("Enter Day Number: ");
+                    int dayNum = sc.nextInt();
+                    System.out.print("Quantity: ");
+                    int quantity = sc.nextInt();
+                    System.out.println("Select Vaccine");
+
+                    for (int i = 0; i < Vaccine.vaccines.size(); i++) {
+                        System.out.println(i + ". " + Vaccine.vaccines.get(i));
+                    }
+                    int vaccineNum = sc.nextInt();
+                    addHospitalSlot(numSlots, dayNum, quantity, Vaccine.vaccines.get(vaccineNum), hosID);
+                }
+            }else if(ip==6){
+                System.out.print("Enter Hospital ID: ");
+                int hosID=sc.nextInt();
+                listAllSlots(hosID);
+            }else if(ip==5){
+
             }
             System.out.println("---------------------------------");
          ip=sc.nextInt();

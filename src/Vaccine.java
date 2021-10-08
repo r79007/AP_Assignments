@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Vaccine {
     public static HashMap<String,Vaccine> vaccineMap=new HashMap<>();
+    public static ArrayList<String> vaccines=new ArrayList<>();
     String vaxName;
     int totalDoses;
     int gapBwDoses=0;
@@ -10,7 +12,7 @@ public class Vaccine {
         this.vaxName = vaxName;
         this.totalDoses=totalDoses;
         this.gapBwDoses=gapBwDoses;
-
+        vaccines.add(this.vaxName);
         vaccineMap.put(this.vaxName,this);
     }
 
