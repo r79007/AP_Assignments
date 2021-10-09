@@ -16,6 +16,7 @@ public class VaccinationStatus {
     }
     public void giveDose(){
         this.numDosesGiven+=1;
+        this.hs.quantity--;
     }
     public int numDosesRemaining(){
         return Vaccine.vaccineMap.get(this.vax).totalDoses-this.numDosesGiven;

@@ -8,7 +8,7 @@ public class trial {
 //        String countDigits=Long.toString(n);
 //
 //        System.out.println(countDigits.length());
-        ArrayList<Integer> arr=null;
+        ArrayList<Integer> arr=new ArrayList<>();
 
         System.out.println(arr.size());
     }

@@ -3,11 +3,11 @@ import java.util.HashMap;
 
 public class Hospital {
     public static HashMap<Integer, ArrayList<Hospital>> pinCodeMap=new HashMap<>();
-    public static HashMap<Long,String> IDtoHospitalMap=new HashMap<>();
+    public static HashMap<Integer,String> IDtoHospitalMap=new HashMap<>();
     int pinCode;
     String name;
-    long HID;
-    static long hID=100000;
+    int HID;
+    static int hID=100000;
 
     {
         hID++;
