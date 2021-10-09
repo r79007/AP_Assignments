@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 public class Hospital {
     public static HashMap<Integer, ArrayList<Hospital>> pinCodeMap=new HashMap<>();
-
+    public static HashMap<Long,String> IDtoHospitalMap=new HashMap<>();
     int pinCode;
     String name;
     long HID;
@@ -24,6 +24,7 @@ public class Hospital {
         }else{
             pinCodeMap.get(this.pinCode).add(this);
         }
+        IDtoHospitalMap.put(this.HID,this.name);
 
 
     }

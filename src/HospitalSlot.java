@@ -19,13 +19,7 @@ public class HospitalSlot {
 //        this.nameQuantity.nameOfVaccine=vax;
 //        this.nameQuantity.availableQuantity+=quantity;
         this.HospitalID=HospitalID;
-        if(vaxToHospMap.containsKey(this.vax)){
-            vaxToHospMap.get(this.vax).add(this.HospitalID);
-        }else{
-            ArrayList<Integer> newArr=new ArrayList<>();
-            newArr.add(this.HospitalID);
-            vaxToHospMap.put(this.vax,newArr);
-        }
+
         this.numberOfSlots+=numberOfSlots;
 
 
@@ -42,6 +36,14 @@ public class HospitalSlot {
             HospitalSlotMap2.get(this.HospitalID).add(this);
         }
         HospitalSlotMap.put(HospitalID,this);
+
+        if(vaxToHospMap.containsKey(this.vax)){
+            vaxToHospMap.get(this.vax).add(this.HospitalID);
+        }else{
+            ArrayList<Integer> newArr=new ArrayList<>();
+            newArr.add(this.HospitalID);
+            vaxToHospMap.put(this.vax,newArr);
+        }
     }
 
     public void printHospitalSlot(){

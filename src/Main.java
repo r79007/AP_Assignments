@@ -50,19 +50,37 @@ public class Main {
 
 
     }
-    public static void listAllSlots(int hosID){
+    public static ArrayList<Integer> listAllSlots(int hosID){
         ArrayList<HospitalSlot> hospitalSlotArrayList=HospitalSlot.HospitalSlotMap2.get(hosID);
+        ArrayList<Integer> options=new ArrayList<>();
         if(hospitalSlotArrayList!=null){
             for(int i=0;i<hospitalSlotArrayList.size();i++){
                 System.out.println("Day: "+hospitalSlotArrayList.get(i).dayNumber+" "+"Vaccine: "+hospitalSlotArrayList.get(i).vax+" Available Qty: "+hospitalSlotArrayList.get(i).quantity);
+                options.add(i);
             }
+            return options;
+
         }else{
             System.out.println("No slots added");
+            return null;
         }
+
+    }
+    public static void addSlotByVaccine(String vaxName){
+            ArrayList<Integer> arrayList=HospitalSlot.vaxToHospMap.get(vaxName);
+            if(arrayList!=null){
+                for(int i=0;i<arrayList.size();i++){
+                    System.out.println(arrayList.get(i)+" "+Hospital.IDtoHospitalMap.get(arrayList.get(i)));
+                }
+
+
+
+            }
     }
 
 
     public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
         System.out.println("CoWin Portal initialized....\n" +
                 "---------------------------------\n" +
                 "1. Add Vaccine\n" +
@@ -75,7 +93,7 @@ public class Main {
                 "8. Exit\n" +
                 "---------------------------------");
 
-        Scanner sc=new Scanner(System.in);
+
         int ip=sc.nextInt();
         while(ip!=8){
             if(ip==1){
@@ -128,6 +146,15 @@ public class Main {
                 int hosID=sc.nextInt();
                 listAllSlots(hosID);
             }else if(ip==5){
+                System.out.println("Enter patient Unique ID: ");
+                long uniqueID=sc.nextLong();
+                System.out.println();
+                System.out.print("Enter hospital id: ");
+                int hospID=sc.nextInt();
+                listAllSlots(hospID);
+                System.out.print("Choose Slot: ");
+                int slot=sc.nextInt();
+
 
             }
             System.out.println("---------------------------------");
