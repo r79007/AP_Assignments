@@ -55,7 +55,7 @@ public class Main {
         ArrayList<Integer> options=new ArrayList<>();
         if(hospitalSlotArrayList!=null){
             for(int i=0;i<hospitalSlotArrayList.size();i++){
-                System.out.println("Day: "+hospitalSlotArrayList.get(i).dayNumber+" "+"Vaccine: "+hospitalSlotArrayList.get(i).vax+" Available Qty: "+hospitalSlotArrayList.get(i).quantity);
+                System.out.println(i+"-> "+"Day: "+hospitalSlotArrayList.get(i).dayNumber+" "+"Vaccine: "+hospitalSlotArrayList.get(i).vax+" Available Qty: "+hospitalSlotArrayList.get(i).quantity);
                 options.add(i);
             }
             return options;
@@ -65,6 +65,23 @@ public class Main {
             return null;
         }
 
+    }
+    public static ArrayList<Integer> listAllSlotsByVax(int hosID,String vaxName) {
+        ArrayList<HospitalSlot> hospitalSlotArrayList = HospitalSlot.HospitalSlotMap2.get(hosID);
+        ArrayList<Integer> options = new ArrayList<>();
+        if (hospitalSlotArrayList != null) {
+            for (int i = 0; i < hospitalSlotArrayList.size(); i++) {
+                if (hospitalSlotArrayList.get(i).vax == vaxName) {
+                    System.out.println(i + "-> " + "Day: " + hospitalSlotArrayList.get(i).dayNumber + " " + "Vaccine: " + hospitalSlotArrayList.get(i).vax + " Available Qty: " + hospitalSlotArrayList.get(i).quantity);
+                    options.add(i);
+                }
+            }
+            return options;
+
+        } else {
+            System.out.println("No slots added");
+            return null;
+        }
     }
     public static void addSlotByVaccine(String vaxName){
             ArrayList<Integer> arrayList=HospitalSlot.vaxToHospMap.get(vaxName);
@@ -76,6 +93,12 @@ public class Main {
 
 
             }
+    }
+    public static void listAllSlotsByPinCode(int pinCode){
+        ArrayList<Hospital> arr=Hospital.pinCodeMap.get(pinCode);
+        for(int i=0;i<arr.size();i++){
+            System.out.println(arr.get(i).pinCode+" "+arr.get(i).name);
+        }
     }
     public static void giveVaccine(long uniqueID,HospitalSlot hs){
         if(VaccinationStatus.vaxStatusMap.containsKey(uniqueID)){
@@ -90,10 +113,14 @@ public class Main {
                 System.out.println("Two different vaccines cannot be given to the same person");
             }
         }else{
-            VaccinationStatus vs=new VaccinationStatus(uniqueID,hs.vax);
+            VaccinationStatus vs=new VaccinationStatus(uniqueID,hs.vax,hs);
             System.out.println(Citizen.citizenMap.get(uniqueID).name+" vaccinated with "+hs.vax);
         }
 
+    }
+    public static void getVaxStatus(long uid){
+        VaccinationStatus vs=VaccinationStatus.vaxStatusMap.get(uid);
+        vs.printVaxStatus();
     }
 
 
@@ -142,7 +169,7 @@ public class Main {
                 long uniqueID=sc.nextLong();
                 registerCitizen(citName,age,uniqueID);
             }else if(ip==4){
-                System.out.print("Enter Hosptal ID: ");
+                System.out.print("Enter Hospital ID: ");
                 int hosID=sc.nextInt();
                 System.out.print("Enter number of Slots to be added: ");
                 int numSlots=sc.nextInt();
@@ -164,18 +191,42 @@ public class Main {
                 int hosID=sc.nextInt();
                 listAllSlots(hosID);
             }else if(ip==5){
-                System.out.println("Enter patient Unique ID: ");
+                System.out.print("Enter patient Unique ID: ");
                 long uniqueID=sc.nextLong();
-                System.out.println();
-                System.out.print("Enter hospital id: ");
-                int hospID=sc.nextInt();
-                ArrayList<Integer> options=listAllSlots(hospID);
-                System.out.print("Choose Slot: ");
-                int slot=sc.nextInt();
-                HospitalSlot hs=HospitalSlot.HospitalSlotMap2.get(hospID).get(slot);
-                giveVaccine(uniqueID,hs);
-            }else if(ip==7){
 
+
+                System.out.println(1+". "+"Search by area");
+                System.out.println(2+". "+"Search by Vaccine");
+                System.out.println(3+". "+"Exit");
+                System.out.print("Enter option: ");
+                int opt=sc.nextInt();
+                if(opt==2) {
+                    System.out.print("Enter Vaccine name: ");
+                    String vaxName=sc.next();
+                    addSlotByVaccine(vaxName);
+                    System.out.print("Enter hospital id: ");
+                    int hospID = sc.nextInt();
+                    ArrayList<Integer> options = listAllSlotsByVax(hospID,vaxName);
+                    System.out.print("Choose Slot: ");
+                    int slot = sc.nextInt();
+                    HospitalSlot hs = HospitalSlot.HospitalSlotMap2.get(hospID).get(slot);
+                    giveVaccine(uniqueID, hs);
+                }else if(opt==1){
+                    System.out.print("Enter PinCode: ");
+                    int pinCode=sc.nextInt();
+                    listAllSlotsByPinCode(pinCode);
+                    System.out.print("Enter hospital id: ");
+                    int hospID = sc.nextInt();
+                    ArrayList<Integer> options = listAllSlots(hospID);
+                    System.out.print("Choose Slot: ");
+                    int slot = sc.nextInt();
+                    HospitalSlot hs = HospitalSlot.HospitalSlotMap2.get(hospID).get(slot);
+                    giveVaccine(uniqueID, hs);
+                }
+            }else if(ip==7){
+                System.out.print("Enter Patient ID: ");
+                long uid=sc.nextLong();
+                getVaxStatus(uid);
             }
             System.out.println("---------------------------------");
          ip=sc.nextInt();

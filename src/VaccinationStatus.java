@@ -5,11 +5,13 @@ public class VaccinationStatus {
     long uID;
     String vax;
     int numDosesGiven=0;
+    HospitalSlot hs;
 
-    public VaccinationStatus(long uID,String vax){
+    public VaccinationStatus(long uID,String vax,HospitalSlot hs){
         this.uID=uID;
         this.vax=vax;
         this.numDosesGiven+=1;
+        this.hs=hs;
         vaxStatusMap.put(this.uID,this);
     }
     public void giveDose(){
@@ -20,7 +22,7 @@ public class VaccinationStatus {
     }
 
     public int dueDate(){
-        return Vaccine.vaccineMap.get(this.vax).gapBwDoses;
+        return Vaccine.vaccineMap.get(this.vax).gapBwDoses+this.hs.dayNumber;
     }
 
     public void printVaxStatus(){
@@ -31,7 +33,7 @@ public class VaccinationStatus {
         }
         System.out.println("Vaccine Given: "+this.vax);
         System.out.println("Number of Doses given: "+this.numDosesGiven);
-        System.out.println();
+        System.out.println("Next Dose due date: "+this.dueDate());
     }
 
 
