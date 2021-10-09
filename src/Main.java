@@ -77,6 +77,24 @@ public class Main {
 
             }
     }
+    public static void giveVaccine(long uniqueID,HospitalSlot hs){
+        if(VaccinationStatus.vaxStatusMap.containsKey(uniqueID)){
+            if(hs.vax.equals(VaccinationStatus.vaxStatusMap.get(uniqueID).vax)){
+                if(VaccinationStatus.vaxStatusMap.get(uniqueID).numDosesRemaining()!=0){
+                    VaccinationStatus.vaxStatusMap.get(uniqueID).giveDose();
+                    System.out.println(Citizen.citizenMap.get(uniqueID).name+" vaccinated with "+hs.vax);
+                }else{
+                    System.out.println("Citizen is already fully vaccinated");
+                }
+            }else{
+                System.out.println("Two different vaccines cannot be given to the same person");
+            }
+        }else{
+            VaccinationStatus vs=new VaccinationStatus(uniqueID,hs.vax);
+            System.out.println(Citizen.citizenMap.get(uniqueID).name+" vaccinated with "+hs.vax);
+        }
+
+    }
 
 
     public static void main(String[] args) {
@@ -151,10 +169,12 @@ public class Main {
                 System.out.println();
                 System.out.print("Enter hospital id: ");
                 int hospID=sc.nextInt();
-                listAllSlots(hospID);
+                ArrayList<Integer> options=listAllSlots(hospID);
                 System.out.print("Choose Slot: ");
                 int slot=sc.nextInt();
-
+                HospitalSlot hs=HospitalSlot.HospitalSlotMap2.get(hospID).get(slot);
+                giveVaccine(uniqueID,hs);
+            }else if(ip==7){
 
             }
             System.out.println("---------------------------------");
