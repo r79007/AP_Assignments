@@ -130,7 +130,7 @@ public class Main {
                             break;
                         }
                     }
-                    System.out.println(i + "-> " + "Day: " + hospitalSlotArrayList.get(i).dayNumber + " " + "Vaccine: " + hospitalSlotArrayList.get(i).vax + " Available Qty: " + hospitalSlotArrayList.get(i).quantity);
+                    System.out.println(i + "-> " + "Day: " + hospitalSlotArrayList.get(i).dayNumber + " " + "Vaccine: " + hospitalSlotArrayList.get(i).vax + " Available Qty: " + quan);
                     options.add(i);
                 }else if(hospitalSlotArrayList.get(i).vax.equals(vaxName) && (VaccinationStatus.vaxStatusMap.get(uniqueID).dueDate()==hospitalSlotArrayList.get(i).dayNumber)){
                     for(Quantity2 j:HospitalSlot.slotQuantityMap2.keySet()){
@@ -139,7 +139,7 @@ public class Main {
                             break;
                         }
                     }
-                    System.out.println(i + "-> " + "Day: " + hospitalSlotArrayList.get(i).dayNumber + " " + "Vaccine: " + hospitalSlotArrayList.get(i).vax + " Available Qty: " + hospitalSlotArrayList.get(i).quantity);
+                    System.out.println(i + "-> " + "Day: " + hospitalSlotArrayList.get(i).dayNumber + " " + "Vaccine: " + hospitalSlotArrayList.get(i).vax + " Available Qty: " + quan);
                     options.add(i);
                 }
             }
