@@ -8,6 +8,7 @@ public class trial {
         String s="";
         s+=sc.nextLine();
         System.out.print("Enter age: ");
+
         int age=sc.nextInt();
         System.out.println(s+" "+age);
     }

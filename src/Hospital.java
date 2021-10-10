@@ -4,6 +4,7 @@ import java.util.HashMap;
 public class Hospital {
     public static HashMap<Integer, ArrayList<Hospital>> pinCodeMap=new HashMap<>();
     public static HashMap<Integer,String> IDtoHospitalMap=new HashMap<>();
+
     int pinCode;
     String name;
     int HID;

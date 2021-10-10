@@ -15,8 +15,16 @@ public class Citizen {
 
     public void printCitizen(){
         System.out.println("Citizen Name: Age: Unique ID: Citizen Name: "+this.name+", "+"Age: "+this.age+", "+"Unique ID: "+this.uID);
-        if(this.age<=18){
+        if(this.age<18){
             System.out.println("Only above 18 are allowed");
+        }
+    }
+
+    public static void printCitizenShipStatus(long uid){
+        if(citizenMap!=null && citizenMap.containsKey(uid)){
+            System.out.println("Citizen REGISTERED");
+        }else{
+            System.out.println("Citizen UNREGISTERED");
         }
     }
 
