@@ -34,7 +34,9 @@ public class VaccinationStatus {
         }
         System.out.println("Vaccine Given: "+this.vax);
         System.out.println("Number of Doses given: "+this.numDosesGiven);
-        System.out.println("Next Dose due date: "+this.dueDate());
+        if(this.dueDate()!=0) {
+            System.out.println("Next Dose due date: " + this.dueDate());
+        }
     }
 
 

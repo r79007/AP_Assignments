@@ -37,8 +37,8 @@ public class Main {
         ArrayList<HospitalSlot> hslotArr=HospitalSlot.HospitalSlotMap2.get(HospitalID);
         if(hslotArr!=null) {
             for (int i = 0; i < hslotArr.size(); i++) {
-                if (hslotArr.get(i).dayNumber == dayNumber) {
-                    System.out.println("There already exists a slot for this hospital for this day.");
+                if ((hslotArr.get(i).dayNumber == dayNumber) && hslotArr.get(i).vax.equals(vax)) {
+                    System.out.println("There already exists a slot for this vaccine in this hospital for this day.");
                     return;
                 }
             }
@@ -181,9 +181,12 @@ public class Main {
         while(ip!=8){
             if(ip==1){
                 System.out.print("Vaccine Name: ");
-                String name=sc.next();
+                sc.nextLine();
+                String name=sc.nextLine();
+
                 System.out.print("Number of Doses: ");
                 int numDoses=sc.nextInt();
+                sc.nextLine();
                 System.out.print("Gap between doses: ");
                 int gap;
                 if(numDoses<2){
@@ -194,15 +197,24 @@ public class Main {
                 addVaccine(name,numDoses,gap);
             }else if(ip==2){
                 System.out.print("Hospital Name: ");
-                String hospitalName= sc.next();
+                sc.nextLine();
+                String hospitalName=sc.nextLine();
+
+
                 System.out.print("PinCode: ");
+
                 int pinCode= sc.nextInt();
+                sc.nextLine();
                 registerHospital(hospitalName,pinCode);
             }else if(ip==3){
                 System.out.print("Citizen Name: ");
-                String citName=sc.next();
+                sc.nextLine();
+                String citName=sc.nextLine();
+
                 System.out.print("Age: ");
+
                 int age=sc.nextInt();
+                sc.nextLine();
                 System.out.print("Unique ID: ");
                 long uniqueID=sc.nextLong();
                 registerCitizen(citName,age,uniqueID);
@@ -240,10 +252,14 @@ public class Main {
                 int opt=sc.nextInt();
                 if(opt==2) {
                     System.out.print("Enter Vaccine name: ");
-                    String vaxName=sc.next();
+                    sc.nextLine();
+                    String vaxName=sc.nextLine();
+                    //sc.nextLine();
                     addSlotByVaccine(vaxName);
                     System.out.print("Enter hospital id: ");
+
                     int hospID = sc.nextInt();
+                    sc.nextLine();
                     ArrayList<Integer> options = listAllSlotsByVax(hospID,vaxName,uniqueID);
                     if(options!=null && options.size()!=0) {
                         System.out.print("Choose Slot: ");
@@ -275,6 +291,17 @@ public class Main {
                 getVaxStatus(uid);
             }
             System.out.println("---------------------------------");
+            System.out.println("CoWin Portal initialized....\n" +
+                    "---------------------------------\n" +
+                    "1. Add Vaccine\n" +
+                    "2. Register Hospital\n" +
+                    "3. Register Citizen\n" +
+                    "4. Add Slot for Vaccination\n" +
+                    "5. Book Slot for Vaccination\n" +
+                    "6. List all slots for a hospital\n" +
+                    "7. Check Vaccination Status\n" +
+                    "8. Exit\n" +
+                    "---------------------------------\n");
          ip=sc.nextInt();
         }
 
